@@ -3,6 +3,11 @@ __author__ = 'Daoyuan'
 from BaseSolution import *
 
 class CourseScheduleI(BaseSolution):
+    """
+
+    [url](https://leetcode.com/problems/course-schedule/)
+    Note: Topology Sort
+    """
     def __init__(self):
         BaseSolution.__init__(self)
         self.push_test((2,[[1,0]]), True )

@@ -1,5 +1,5 @@
 __author__ = 'Daoyuan'
-from  solutions import *
+from solutions import *
 
 solution = CourseScheduleI.CourseScheduleI()
 solution.evaluate()
