@@ -1,43 +1,68 @@
 __author__ = 'Daoyuan'
 from BaseSolution import *
 import math
+import random
+class ListNode(object):
+    def __init__(self, x):
+        self.val = x
+        self.next = None
+
+    def toString(self):
+        tmp = self
+        ret =  ""
+        while tmp is not None:
+            ret = ret + ' ' + str(tmp.val)
+            tmp = tmp.next
+        ret.strip()
+        return ret
+    def __str__(self):
+        ret = []
+        tmp = self
+        while tmp is not None:
+            ret.append(tmp.val)
+            tmp = tmp.next
+        return ret.__str__()
+
+    def __eq__(self, other):
+        if self.__str__() == other or type(other) == ListNode and self.__str__() == other.__str__():
+            return True
+        else:
+            return False
+
+    @staticmethod
+    def create_from_arr(arr):
+        if len(arr) <= 0 :
+            return None
+        tmp = head = ListNode(arr[0])
+        for idx, item in enumerate(arr):
+            if idx==0: continue
+            tmp.next = ListNode(item)
+            tmp = tmp.next
+        return head
+
 class SortList(BaseSolution):
-    class ListNode(object):
-        def __init__(self, x):
-            self.val = x
-            self.next = None
-
-        def toString(self):
-            tmp = self
-            ret =  ""
-            while tmp is not None:
-                ret = ret + ' ' + str(tmp.val)
-                tmp = tmp.next
-            ret.strip()
-            return ret
-
-        @staticmethod
-        def create_from_arr(arr):
-            if len(arr) <= 0 :
-                return None
-            tmp = head = SortList.ListNode(arr[0])
-            for idx, item in enumerate(arr):
-                if idx==0: continue
-                tmp.next = SortList.ListNode(item)
-                tmp = tmp.next
-            return head
-
+    """
+    Sort a linked list in O(n log n) time using constant space complexity.
+    :url: https://leetcode.com/problems/sort-list/
+    :time: +2hours
+    """
     def __init__(self):
         BaseSolution.__init__(self)
         self.push_test(
-            params=SortList.ListNode.create_from_arr( [3,1,2]),
-            expects=SortList.ListNode.create_from_arr([1,2,3])
+            params= ( ListNode.create_from_arr( [3,1,2]), ),
+            expects= ListNode.create_from_arr([1,2,3])
         )
         self.push_test(
-            params = SortList.ListNode.create_from_arr(range(9,0,-1)),
-            expects = SortList.ListNode.create_from_arr(range(1,10))
+            params = (ListNode.create_from_arr(range(9,0,-1)),),
+            expects = ListNode.create_from_arr(range(1,10))
         )
-
+        rand = []
+        for i in range(20):
+            rand.append(random.randint(0,39))
+        self.push_test(
+            params = (ListNode.create_from_arr(rand), ),
+            expects = sorted(rand)
+        )
 
 
     def solution(self, head):
@@ -47,10 +72,10 @@ class SortList(BaseSolution):
             tmp = tmp.next
             length = length+ 1
 
-        for i  in range(0,int(math.floor(math.log(length,2)))):
+        for i  in range(0,self.log2(length)):
             leng = length
             step = 2 ** i
-            newtail = SortList.ListNode(-1)
+            newtail = ListNode(-1)
             newtail.next = head
             lasttail = None
             while leng > 0:
@@ -70,6 +95,12 @@ class SortList(BaseSolution):
                 leng = leng -len2 - len1
         return head
 
+    def log2(self, num):
+        ret = 0
+        while num > 0:
+            ret = ret+1
+            num = num>>1
+        return ret
 
     def merge_list(self, head1, len1, head2, len2):
         if head1 is None:
@@ -91,6 +122,7 @@ class SortList(BaseSolution):
                 prev1.next = ptr2
                 ptr2 = ptr2.next
                 prev1.next.next=ptr1
+                prev1 = prev1.next
             else:
                 tmp2 = ptr2.next
                 ptr2.next = ptr1
@@ -104,18 +136,3 @@ class SortList(BaseSolution):
             newtail = newtail.next
         newtail.next= oldtail
         return newhead, newtail
-
-
-list1=  SortList.ListNode.create_from_arr(range(9,0,-1))
-print list1.toString()
-
-list2 =  SortList.ListNode.create_from_arr([6,7,8,9,2,3,4,5,1])
-list3 = list2
-while list3.val != 2:
-    list3 = list3.next
-sort = SortList()
-newhead, newtail = sort.merge_list(list2,4,list3,4)
-head= sort.solution(list1)
-
-print head.toString()
-pass

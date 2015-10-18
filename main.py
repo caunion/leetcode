@@ -1,7 +1,7 @@
 __author__ = 'Daoyuan'
 from solutions import *
 
-solution = CourseScheduleI.CourseScheduleI()
+solution = ThreeSumClosest.ThreeSumClosest()
 solution.evaluate()
 
 
