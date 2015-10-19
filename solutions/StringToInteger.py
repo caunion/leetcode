@@ -8,6 +8,8 @@ class StringToInteger(BaseSolution):
 
     note the boundary check:
     # -2147483649, 2147483648, '2aaa'
+
+    Easy
     """
     def __init__(self):
         BaseSolution.__init__(self)
