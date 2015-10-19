@@ -2,7 +2,11 @@ __author__ = 'Daoyuan'
 from BaseSolution import *
 
 class ValidNumber(BaseSolution):
+    """
+    https://leetcode.com/problems/valid-number/
 
+    Hard
+    """
     def __init__(self):
         BaseSolution.__init__(self)
         self.push_test(("6e6.5",), False)
