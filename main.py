@@ -1,7 +1,7 @@
 __author__ = 'Daoyuan'
 from solutions import *
 
-solution = ThreeSumClosest.ThreeSumClosest()
+solution = ValidPalindrome.ValidPalindrome()
 solution.evaluate()
 
 
