@@ -1,7 +1,7 @@
 __author__ = 'Daoyuan'
 from solutions import *
 
-solution = ValidPalindrome.ValidPalindrome()
+solution = ValidNumber.ValidNumber()
 solution.evaluate()
 
 
