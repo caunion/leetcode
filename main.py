@@ -1,7 +1,7 @@
 __author__ = 'Daoyuan'
 from solutions import *
 
-solution = StringToInteger.StringToInteger()
+solution = CountPrimes.CountPrimes()
 solution.evaluate()
 
 
