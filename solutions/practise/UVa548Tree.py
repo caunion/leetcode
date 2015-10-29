@@ -40,7 +40,7 @@ class UVa548Tree(BaseSolution):
             ret = self.min_weight(root)
             result.append(ret[0].val)
         return result
-    
+
     def min_weight(self, root):
         if root is None:
             return  -1
