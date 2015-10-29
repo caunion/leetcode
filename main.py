@@ -2,7 +2,7 @@ __author__ = 'Daoyuan'
 from solutions import *
 from solutions.practise import *
 
-solution = UVa839NotSoMobile.UVa839NotSoMobile()
+solution = UVa297Quadtrees.UVa297Quadtrees()
 solution.evaluate()
 
 
