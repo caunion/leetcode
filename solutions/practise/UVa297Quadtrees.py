@@ -79,3 +79,51 @@ class UVa297Quadtrees(BaseSolution):
             idx[0] = idx[0] + 1
             root.forth = self.build(raw, idx)
         return root
+
+
+    # second solution, scan once
+    def solution(self, params):
+        n = int(params[0])
+        result = []
+        for i in xrange(n):
+            left = [self.color2num(c) for c in params[i*2+1]]
+            right = [self.color2num(c) for c in params[i*2+2]]
+            pixel = 1024
+            ret = self.solve(left,right,[0],[0], pixel)
+            result.append(ret)
+        return result
+
+    def solve(self, left, right, L, R, pixel):
+        curL = L[0]
+        curR = R[0]
+        if left[curL] == 0 and left[curL] == right[curR]:
+            return 0
+        if left[curL] == 2 or right[curR] == 2:
+            if left[curL] == 1:  # Note this edge condition !!!
+                L[0] = L[0] + 4
+            if right[curR] == 1:
+                R[0] = R[0] + 4
+            return pixel
+
+        black = 0
+        offsetL = 1
+        offsetR = 1
+        if left[curL] == 0:
+            offsetL = 0
+        if right[curR] == 0:
+            offsetR = 0
+
+        L[0] = L[0] + offsetL
+        R[0] = R[0] + offsetR
+        black = black + self.solve(left,right,L,R, pixel/4)
+        L[0] = L[0] + offsetL
+        R[0] = R[0] + offsetR
+        black = black + self.solve(left,right,L,R, pixel/4)
+        L[0] = L[0] + offsetL
+        R[0] = R[0] + offsetR
+        black = black + self.solve(left,right,L,R, pixel/4)
+        L[0] = L[0] + offsetL
+        R[0] = R[0] + offsetR
+        black = black + self.solve(left,right,L,R, pixel/4)
+
+        return black
