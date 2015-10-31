@@ -2,6 +2,7 @@ __author__ = 'Caunion'
 class BaseSolution:
     def __init__(self):
         self.tests = []
+        self.fuckinglevel = 0
 
     def push_test(self, params, expects=None, expect_oneof=False, expect_unordered = False):
         simpleEvaluate = False

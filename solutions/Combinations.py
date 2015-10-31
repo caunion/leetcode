@@ -10,6 +10,7 @@ class Combinations(BaseSolution):
     """
     def __init__(self):
         BaseSolution.__init__(self)
+        self.fuckinglevel = 8
         self.push_test(
             params = (4,2,),
             expects = [
@@ -42,8 +43,15 @@ class Combinations(BaseSolution):
         k = min(self.factory(n), k)
         nums = range(1,n+1)
         self.result = []
-        self.combination(nums, k, 0)
-        return self.result
+        return list(self.combines(nums, k, 0))
+
+    def combines(self, nums, k, idx):
+        for i in range(idx, len(nums)):
+            if k == 1:
+                yield [nums[i]]
+            else:
+                for next in  self.combines(nums, k-1, i+1):
+                    yield [nums[i],] + next
 
     def combination(self, nums, k, idx):
         if k == 0:
@@ -62,3 +70,20 @@ class Combinations(BaseSolution):
             ret = ret * n
             n = n -1
         return ret
+
+    ## other's solution with iteration
+    def solution(self, n, k):
+        res, stack=[], [([i for i in xrange(1,n+1)], k, [])]
+        while stack:
+            lst, k, temp=stack.pop()
+            if k<=len(lst):
+                if not k:
+                    res+=temp,
+                for i in xrange(len(lst)):
+                    stack+=(lst[i+1:],k-1,temp+[lst[i]]),
+        return res
+
+
+    # def solution(self, n, k):
+    #     ret = []
+    #     queue = [ () ]
