@@ -2,5 +2,5 @@ __author__ = 'Daoyuan'
 from solutions import *
 from solutions.practise import *
 
-solution = ValidAnagram.ValidAnagram()
+solution = PerfectSquares.PerfectSquares()
 solution.evaluate()
