@@ -12,6 +12,16 @@ class Combinations(BaseSolution):
         BaseSolution.__init__(self)
         self.fuckinglevel = 8
         self.push_test(
+            params = (3,3),
+            expects = [[1,2,3]],
+            expect_unordered=True
+        )
+        self.push_test(
+            params = (2,2),
+            expects = [[1,2]],
+            expect_unordered=True
+        )
+        self.push_test(
             params = (4,2,),
             expects = [
                       [2,4],
@@ -84,6 +94,24 @@ class Combinations(BaseSolution):
         return res
 
 
-    # def solution(self, n, k):
-    #     ret = []
-    #     queue = [ () ]
+
+    ## combination is essentially DFS a tree.
+    ## so does permutation.
+    ## so, the it can be write as either a recursion or a iteration
+    def solution(self, n, k):
+        k = min(n, k)
+        nums = range(1,n+1)
+        return self.dfs( range(1,n+1), k)
+
+    def dfs(self, nums, k):
+        queue = [ (i, k, [ nums[i],])  for i in xrange(len(nums))] #nodes at root layer
+        ret = []
+        length = len(nums)
+        while len(queue) > 0:
+            top = queue.pop(0)
+            if top[1] == 1:
+                ret.append( top[2] )
+            else:
+                for j in range(top[0] + 1, length):
+                    queue.append( (j, top[1]-1, top[2] + [ nums[j],]) ) # extend child node to queue
+        return ret

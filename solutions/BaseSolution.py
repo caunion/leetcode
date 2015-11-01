@@ -1,4 +1,6 @@
 __author__ = 'Caunion'
+import time
+
 class BaseSolution:
     def __init__(self):
         self.tests = []
@@ -17,8 +19,11 @@ class BaseSolution:
         })
 
     def evaluate(self):
+        elapse = 0
         for idx, test in enumerate(self.tests):
+            t = time.time()
             result = self.solution(*(test['params']))
+            elapse = elapse + (time.time() - t)
             if test['simple_evaluation'] == False:
                 passed = False
                 if test['expect_oneof'] == True:
@@ -45,5 +50,6 @@ class BaseSolution:
             else:
                 print "Simpletest #{0} returns {1}".format(idx, result)
 
+        print "Elapse: %f ms" % (elapse*1000)
     def solution(self):
         pass
