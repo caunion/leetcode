@@ -33,7 +33,7 @@ class TreeNode(object):
         return root
     @staticmethod
     def bfs(arr):
-        if len(arr) == 0 : return TreeNode()
+        if len(arr) == 0 or arr[0] == "" : return None
         root = TreeNode( int(arr[0]) )
         queue = [root]
         i = 1
