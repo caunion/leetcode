@@ -82,6 +82,7 @@ class Combinations(BaseSolution):
         return ret
 
     ## other's solution with iteration
+    ## DFS
     def solution(self, n, k):
         res, stack=[], [([i for i in xrange(1,n+1)], k, [])]
         while stack:
@@ -95,15 +96,15 @@ class Combinations(BaseSolution):
 
 
 
-    ## combination is essentially DFS a tree.
+    ## combination is essentially BFS a tree.
     ## so does permutation.
     ## so, the it can be write as either a recursion or a iteration
     def solution(self, n, k):
         k = min(n, k)
         nums = range(1,n+1)
-        return self.dfs( range(1,n+1), k)
+        return self.bfs( range(1,n+1), k)
 
-    def dfs(self, nums, k):
+    def bfs(self, nums, k):
         queue = [ (i, k, [ nums[i],])  for i in xrange(len(nums))] #nodes at root layer
         ret = []
         length = len(nums)
