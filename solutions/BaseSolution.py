@@ -35,6 +35,10 @@ class BaseSolution:
                     ordered_result = sorted(result)
                     if ordered_expects == ordered_result:
                         passed = True
+                    if not passed:
+                        expectset = set(ordered_expects)
+                        resultset = set(ordered_result)
+                        passed = expectset - resultset == set()
                 elif result == test['expects']:
                      passed = True
 

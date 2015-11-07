@@ -9,6 +9,8 @@ class TreeNode(object):
 
     def __str__(self):
         return str(self.val)
+    def __hash__(self):
+        return hash(self.serialize())
 
     def serialize(self):
         queue = [ self ]
