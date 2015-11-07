@@ -6,6 +6,7 @@ class TreeNode(object):
         self.left = left
         self.right = right
         self.next = None
+        self.parent = None
 
     def __str__(self):
         return str(self.val)
