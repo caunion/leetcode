@@ -5,6 +5,7 @@ class TreeNode(object):
         self.val = val
         self.left = left
         self.right = right
+        self.next = None
 
     def __str__(self):
         return str(self.val)
@@ -15,13 +16,20 @@ class TreeNode(object):
         ret = []
         while len(queue) > 0:
             top = queue.pop(0)
-            ret.append(str(top.val))
-            if top.left is not None:
-                queue.append(top.left)
-            if top.right is not None:
-                queue.append(top.right)
+            if top:
+                ret.append(str(top.val))
+            else:
+                ret.append("#")
+                continue
+            queue.append(top.left)
+            queue.append(top.right)
+        while ret[-1] == "#": ret.pop()
         return "{" +",".join(ret) +"}"
 
+    def __eq__(self, other):
+        if isinstance(other, TreeNode):
+            return self.serialize() == other.serialize()
+        return False
     @staticmethod
     def deserialize(treestr):
         if len(treestr) == 0 or treestr=="{}":
