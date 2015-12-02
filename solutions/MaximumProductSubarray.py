@@ -33,3 +33,34 @@ class MaximumProductSubarray(BaseSolution):
             maxv, minv = max(big, maxv), min(small, minv)
         return maxv
 
+    def solution(self, nums):
+        n = len(nums)
+        high = [0] * n
+        low = [0] * n
+        high[0] = low[0] = nums[0]
+        for i in range(1, n):
+            if nums[i-1] == 0:
+                high[i] = nums[i]
+                low[i] = nums[i]
+            else:
+                high[i] = max( high[i-1]*nums[i], nums[i], low[i-1]*nums[i])
+                low[i] = min(high[i-1]*nums[i], nums[i], low[i-1]*nums[i])
+        return max(high)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

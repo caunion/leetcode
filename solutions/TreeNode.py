@@ -8,10 +8,23 @@ class TreeNode(object):
         self.next = None
         self.parent = None
 
+        #for traverse
+        self.state = -1
+        #for disjoint set
+        self.rank = -1
+        # for multi-branch tree
+        self.children = []
+
     def __str__(self):
         return str(self.val)
+
     def __hash__(self):
         return hash(self.serialize())
+
+    def equals(self, other):
+        if isinstance(other, TreeNode):
+            return self.val == other.val
+        return False
 
     def serialize(self):
         queue = [ self ]
@@ -33,6 +46,7 @@ class TreeNode(object):
         if isinstance(other, TreeNode):
             return self.serialize() == other.serialize()
         return False
+
     @staticmethod
     def deserialize(treestr):
         if len(treestr) == 0 or treestr=="{}":
