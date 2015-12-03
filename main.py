@@ -3,5 +3,5 @@ from solutions import *
 from solutions.practise import *
 from solutions.clrs import *
 
-solution = LongestIncreasingSubsequence.LongestIncreasingSubsequence()
+solution = MoveZeroes.MoveZeroes()
 solution.evaluate()
