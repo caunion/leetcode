@@ -1,6 +1,6 @@
 __author__ = 'Caunion'
 import time
-
+from collections import Hashable
 class BaseSolution:
     def __init__(self):
         self.tests = []
@@ -35,7 +35,12 @@ class BaseSolution:
                     ordered_result = sorted(result)
                     if ordered_expects == ordered_result:
                         passed = True
-                    if not passed:
+                    sample = None
+                    for item in ordered_expects:
+                        if item and not sample: sample = item
+                    for item in ordered_result:
+                        if item and not sample: sample = item
+                    if not passed and isinstance(sample, Hashable):
                         expectset = set(ordered_expects)
                         resultset = set(ordered_result)
                         passed = expectset - resultset == set()
