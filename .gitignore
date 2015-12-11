@@ -5,3 +5,4 @@ bower_components/
 
 .idea/
 *.pyc
+*.baiduyun.uploading.cfg
