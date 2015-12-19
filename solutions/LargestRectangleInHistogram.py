@@ -1,5 +1,8 @@
 from BaseSolution import *
 class LargestRectangleInHistogram(BaseSolution):
+
+    # more explanation at
+    # http://www.geeksforgeeks.org/largest-rectangle-under-histogram/
     def __init__(self):
         BaseSolution.__init__(self)
         self.fuckinglevel = 9
