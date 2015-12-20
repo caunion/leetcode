@@ -29,3 +29,21 @@ class TrappingRainWater(BaseSolution):
                         ret += (h*w)
                 stack.append(i)
         return ret
+
+    # beautiful drain method
+    # introduced by https://leetcode.com/discuss/62506/easy-to-understand-python-10-line-60ms-o-n
+    def solution(self, height):
+        if not height or len(height) < 2: return 0
+        n = len(height)
+        waterLevel = [0] * n
+        left = right = 0
+        for i,h in enumerate(height):
+            left = max(h, left)
+            waterLevel[i] = left
+
+        for i in xrange(n-1, -1, -1):
+            h = height[i]
+            right = max(right, h)
+            waterLevel[i] = min(waterLevel[i], right) - h
+        ret = sum(waterLevel)
+        return ret
