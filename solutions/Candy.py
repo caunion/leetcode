@@ -52,15 +52,16 @@ class Candy(BaseSolution):
                 if ratings[start] != ratings[start+1]:
                     ret[start] = max(ret[start], ret[start+1] + 1)
             i += 1
-        ret2 = self.candy(ratings)
         return sum(ret)
 
-    def candy(self, ratings):
-        res = len(ratings) * [1]
-        for i in xrange(1, len(ratings)):  # from left to right
+    def solution(self, ratings):
+        if not ratings or len(ratings) == 0: return 0
+        n = len(ratings)
+        ret = [1] * n
+        for i in range(1, n):
             if ratings[i] > ratings[i-1]:
-                res[i] = res[i-1] + 1
-        for i in xrange(len(ratings)-1, 0, -1):  # from right to left
-            if ratings[i-1] > ratings[i]:
-                res[i-1] = max(res[i-1], res[i]+1)
-        return res
+                ret[i] = ret[i-1]+1
+        for i in range(n-2, -1, -1):
+            if ratings[i] > ratings[i+1]:
+                ret[i] = max(ret[i+1]+1, ret[i])
+        return sum(ret)
